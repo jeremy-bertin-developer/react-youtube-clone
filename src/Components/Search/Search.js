@@ -15,8 +15,9 @@ class Search extends React.Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    this.props.searchVideo(this.state.term);
-    console.log(this.state.term);
+    let term =  this.state.term;
+    this.props.searchVideo(term);
+    // console.log(term);
   };
 
   render() {
