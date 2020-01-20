@@ -1,17 +1,18 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import Search from './Components/Search/Search';
-import VideoDetail from './Components/VideoDetail/VideoDetail';
+import Search from "./Components/Search/Search";
+import VideoDetail from "./Components/VideoDetail/VideoDetail";
 
 import youtube from "./configs/youtube"; // youtube = axios
+import "bootstrap/dist/css/bootstrap.css";
 
 class App extends React.Component {
   state = {
     videos: []
-  }
+  };
 
-  componentDidMount(){
+  componentDidMount() {
     this.searchVideo("cats");
   }
 
@@ -20,21 +21,22 @@ class App extends React.Component {
       params: {
         q: term
       }
-    })
-    
+    });
+
     this.setState({
       videos: response
-    })
-  }
-  
+    });
+  };
 
-  render(){
+  render() {
     return (
-      <div className="App">
-        <Search searchVideo={this.searchVideo}/>
-        <VideoDetail />
+      <div className="container-fluid">
+        <div className="row">
+          <Search searchVideo={this.searchVideo} />
+          <VideoDetail />
+        </div>
       </div>
-    )
+    );
   }
 }
 
