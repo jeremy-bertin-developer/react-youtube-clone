@@ -2,17 +2,17 @@ import React from "react";
 
 class VideoItem extends React.Component {
   render() {
-    const { idVideo, description, onMouseDown } = this.props;
+    const { idVideo, description, onClick, src } = this.props;
     return (
       <>
-        <iframe
-          onMouseDown={onMouseDown}
-          src={`https://www.youtube.com/embed/${idVideo}`}
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-        <p class="card-text">{description}</p>
+        <div onClick={onClick} idVideo={idVideo} className="card mb-3 border-0 shadow videoItem">
+          <img src={src} className="card-img-top" alt="..."></img>
+          <div className="card-body">
+            <p className="card-text">
+              {description}
+            </p>
+          </div>
+        </div>
       </>
     );
   }

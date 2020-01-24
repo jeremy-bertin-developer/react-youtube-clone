@@ -1,0 +1,26 @@
+.navbar {
+  z-index: 1000;
+}
+
+.sideBar,
+.videoDetail {
+  margin-top: 140px;
+}
+
+.mytube {
+  width: auto;
+  height: 80px;
+}
+
+.card-img-top {
+  width: 70%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.card-img-top:hover {
+  filter: blur(2px);
+  transition: 0.3s ease-in-out;
+}

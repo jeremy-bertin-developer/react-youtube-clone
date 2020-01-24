@@ -16,62 +16,83 @@ class App extends React.Component {
     listVideo: []
   };
 
-
   componentDidMount = async () => {
     const RESPONSE = await youtube.get("/search", {
       params: {
-        q: "trending",
+        q: "React.js"
       }
     });
     const idVideo = RESPONSE.data.items[0].id.videoId;
     const description = RESPONSE.data.items[0].snippet.description;
 
+    // console.log(RESPONSE.data.items[0].etag)
+
     const listVideo = RESPONSE.data.items.map(el => {
-      return <VideoItem onClick={this.handleVideoOnClick}  idVideo={el.id.videoId} description={el.snippet.description}/>
-    })
+
+      let { src, description, idVideo } = this.props;
+
+      src = el.snippet.thumbnails.high.url;
+      description = el.snippet.description;
+      idVideo = el.id.videoId;
+
+      return (
+        <VideoItem
+          onClick={() => this.handleVideoOnClick(idVideo, description)}
+          idVideo={idVideo}
+          src={src}
+          description={description}
+        />
+      );
+    });
 
     this.setState({
       videos: idVideo,
       description: description,
       listVideo: listVideo
-    })
-  }
+    });
+  };
 
   searchVideo = async term => {
     const RESPONSE = await youtube.get("/search", {
       params: {
-        q: term,
+        q: term
       }
     });
-    // console.log(RESPONSE.data.items[0].id.videoId)
-    // console.log(RESPONSE.data.items[0].snippet.description)
+
     const idVideo = RESPONSE.data.items[0].id.videoId;
     const description = RESPONSE.data.items[0].snippet.description;
-    console.log(description)
 
     const listVideo = RESPONSE.data.items.map(el => {
-      return <VideoItem onClick={this.handleVideoOnClick} idVideo={el.id.videoId} description={el.snippet.description}/>
-    })
 
-  //   let monitor = setInterval(function(){
-  //     let elem = document.activeElement;
-  //     if(elem && elem.tagName == 'IFRAME'){
-  //         clearInterval(monitor);
-  //         alert('clicked!');
-  //     }
-  // }, 100);
+      let { src, description, idVideo } = this.props;
 
+      src = el.snippet.thumbnails.high.url;
+      description = el.snippet.description;
+      idVideo = el.id.videoId;
+
+      return (
+        <VideoItem
+          onClick={() => this.handleVideoOnClick(idVideo, description)}
+          idVideo={idVideo}
+          src={src}
+          description={description}
+        />
+      );
+    });
 
     this.setState({
       videos: idVideo,
       description: description,
       listVideo: listVideo
-    })
+    });
   };
 
-  handleVideoOnClick = () => {
-    console.log("hello")
-  }
+  handleVideoOnClick = (idVideo, description) => {
+    this.setState({
+      videos: idVideo,
+      description: description,
+    });
+  };
 
   render() {
     return (
@@ -83,7 +104,10 @@ class App extends React.Component {
         </header>
         <main className="container-fluid">
           <div className="row">
-            <VideoDetail idVideo={this.state.videos} description={this.state.description}/>
+            <VideoDetail
+              idVideo={this.state.videos}
+              description={this.state.description}
+            />
             <VideoList onMouseDown={this.handleVideoOnClick}>
               {this.state.listVideo}
             </VideoList>

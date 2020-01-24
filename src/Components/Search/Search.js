@@ -1,5 +1,4 @@
 import React from "react";
-import "./Search.css";
 import mytube from "../../images/mytube.png";
 
 class Search extends React.Component {
@@ -15,7 +14,7 @@ class Search extends React.Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    let term =  this.state.term;
+    let term = this.state.term;
     this.props.searchVideo(term);
     // console.log(term);
   };
@@ -23,12 +22,15 @@ class Search extends React.Component {
   render() {
     return (
       <>
-        <div className="col-10 mx-auto my-3 py-3 rounded research-wrapper">
-          <img className="mytube" src={mytube} alt=""></img>
-          <form className="px-3" onSubmit={this.handleOnSubmit}>
-            <div className="form-group row">
-              {/* <label for="exampleFormControlInput1">Search ...</label> */}
+        <nav className="navbar navbar-expand-lg shadow navbar-light bg-light col-12 mx-auto mb-3 py-3 position-fixed">
+          <a class="navbar-brand" href="#">
+            <img className="mytube" src={mytube} alt=""></img>
+          </a>
+
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <form className="form-inline w-100" onSubmit={this.handleOnSubmit}>
               <input
+                style={{ width: "inherit" }}
                 type="text"
                 className="form-control"
                 id="exampleFormControlInput1"
@@ -36,9 +38,9 @@ class Search extends React.Component {
                 value={this.state.term}
                 onChange={this.handleOnChange}
               ></input>
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
+        </nav>
       </>
     );
   }
